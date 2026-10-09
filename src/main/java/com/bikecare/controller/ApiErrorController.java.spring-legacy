@@ -1,0 +1,6 @@
+package com.bikecare.controller;
+import jakarta.servlet.http.HttpServletRequest;import java.util.Map;import org.springframework.boot.web.servlet.error.ErrorController;import org.springframework.http.HttpStatus;import org.springframework.http.ResponseEntity;import org.springframework.web.bind.annotation.*;
+@RestController @RequestMapping("/error") public class ApiErrorController implements ErrorController {
+ @RequestMapping public ResponseEntity<?> error(HttpServletRequest request){Object status=request.getAttribute("jakarta.servlet.error.status_code");int code=status instanceof Integer?(Integer)status:500;String uri=String.valueOf(request.getAttribute("jakarta.servlet.error.request_uri"));if(uri.startsWith("/api/")){String message=code==404?"API endpoint not found.":"The request could not be completed.";return ResponseEntity.status(code).body(Map.of("error",message));}return ResponseEntity.status(code).body(Map.of("error","Page not found."));}
+}
+

@@ -1,0 +1,8 @@
+package com.bikecare.config;
+import org.springframework.context.annotation.*;import org.springframework.security.config.annotation.web.builders.HttpSecurity;import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;import org.springframework.security.crypto.password.PasswordEncoder;import org.springframework.security.web.SecurityFilterChain;import org.springframework.security.web.csrf.CookieCsrfTokenRepository;import org.springframework.security.config.http.SessionCreationPolicy;
+@Configuration public class SecurityConfig {
+ @Bean PasswordEncoder passwordEncoder(){return new BCryptPasswordEncoder();}
+ @Bean SecurityFilterChain filterChain(HttpSecurity http)throws Exception{return http.csrf(c->c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())).authorizeHttpRequests(a->a.requestMatchers("/","/*.html","/css/**","/js/**","/api/auth/**","/api/health","/api/csrf").permitAll().anyRequest().permitAll()).exceptionHandling(ex->ex.accessDeniedHandler((req,res,error)->{res.setStatus(403);res.setContentType("application/json");res.getWriter().write("{\"error\":\"Request verification failed. Refresh and retry.\"}");})).sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)).build();}
+}
+
+

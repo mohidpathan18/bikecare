@@ -1,0 +1,6 @@
+package com.bikecare.config;
+import org.springframework.boot.CommandLineRunner;import org.springframework.context.annotation.Bean;import org.springframework.context.annotation.Configuration;import org.springframework.jdbc.core.JdbcTemplate;import org.springframework.security.crypto.password.PasswordEncoder;
+@Configuration public class DataInitializer {
+ @Bean CommandLineRunner adminInitializer(JdbcTemplate db,PasswordEncoder encoder){return args->{String email=System.getenv("BIKECARE_ADMIN_EMAIL"),password=System.getenv("BIKECARE_ADMIN_PASSWORD");if(email!=null&&!email.isBlank()&&password!=null&&!password.isBlank()){if(password.length()<14)throw new IllegalStateException("BIKECARE_ADMIN_PASSWORD must be at least 14 characters");Integer n=db.queryForObject("SELECT COUNT(*) FROM users WHERE email=?",Integer.class,email.toLowerCase());if(n==0)db.update("INSERT INTO users(name,email,password_hash,role) VALUES(?,?,?,'ADMIN')","BikeCare Administrator",email.toLowerCase(),encoder.encode(password));}};}
+}
+

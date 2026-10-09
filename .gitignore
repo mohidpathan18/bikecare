@@ -1,0 +1,18 @@
+
+# Database and secrets
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*
+!.env.example
+
+# Java compiled files
+*.class
+target/
+
+# IDE and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
