@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BikeCare — JDK-only motorcycle service manager
 
 BikeCare runs on the installed JDK 27, Java's built-in `com.sun.net.httpserver.HttpServer`, HTML/CSS/vanilla JavaScript, and the SQLite JDBC JAR already present at `src/main/resources/sqlite-jdbc.jar`. It does not use Maven, Spring, Gradle, Node.js, npm, downloads, or newly installed dependencies.
@@ -64,3 +65,6 @@ The repository includes a `Dockerfile` that compiles the app with `javac` in an 
 
 The database is initialized and migrated additively. Startup does not drop, recreate, or overwrite existing database tables or rows. Keep the persistent disk attached to retain data across deploys; back up the SQLite database before disk or service changes. SQLite is intended for this single service instance and its attached persistent disk. The local `run.bat` and `build.bat` continue to use the installed JDK 27 and the project's local JDBC JAR.
 
+=======
+# bikecare
+>>>>>>> e118351d2cc465c42d4d0ad24e536603c488f411
